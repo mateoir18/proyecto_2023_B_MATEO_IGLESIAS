@@ -1,72 +1,96 @@
 package baraja;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
+import baraja.Carta.palo;
+import baraja.Carta.valor;
 
 public class Baraja {
 
-	private ArrayList<Carta> cartas;
-	private int cartaActual;
+	ArrayList<String> baraja = new ArrayList<String>(40);
+	ArrayList<String> monton = new ArrayList<String>();
 
-	public Baraja() {
-		this.cartas = new ArrayList<>();
-		String palos[] = { "Espadas", "Bastos", "oros", "copas" };
-		for (String palo : palos) {
-			for (int i = 1; i <= 12; i++) {
-				if (i != 8 && i != 9) {
-					this.cartas.add(new Carta(i, palo));
-				}
+	public ArrayList<String> generarBaraja() {
+		for (valor valores : valor.values()) {
 
+			for (palo palos : palo.values()) {
+
+				String carta = valores + " de " + palos + "\n";
+
+				baraja.add(carta);
 			}
+
 		}
-		this.cartaActual = 0;
+		return baraja;
 	}
 
 	public void barajar() {
-		Collections.shuffle(this.cartas);
-		this.cartaActual = 0;
 
+		for (int i = 0; i < baraja.size(); i++) {
+
+			baraja.get(i);
+
+			int posicion = (int) (Math.random() * baraja.size());
+
+			baraja.set(posicion, baraja.get(i));
+
+		}
 	}
 
-	public Carta SiguienteCarta() {
-		if (this.cartaActual < this.cartas.size()) {
-			return this.cartas.get(this.cartaActual++);
+	public String siguienteCarta() {
+		String carta = "";
+		if (!baraja.isEmpty()) {
+			carta = baraja.get(0);
 		} else {
-			System.out.println("No hay más cartas");
-			return null;
+			System.out.println("No hay mas cartas");
 		}
+		return carta;
 	}
 
 	public int cartasDisponibles() {
-		return this.cartas.size() - this.cartaActual;
+
+		return baraja.size();
+
 	}
 
-	public ArrayList<Carta> darCartas(int n) {
-		ArrayList<Carta> cartasADar = new ArrayList<>();
-		if (this.cartasDisponibles() < n) {
-			System.out.println("No hay suficientes cartas.");
-		} else {
-			for (int i = 0; i < n; i++) {
-				cartasADar.add(this.SiguienteCarta());
+	public ArrayList<String> darCartas(int numCartas) {
+
+		ArrayList<String> cartasDadas = new ArrayList<String>();
+
+		for (int i = 0; i < numCartas; i++) {
+
+			String carta = "";
+			if (!baraja.isEmpty()) {
+				carta = baraja.get(0);
+				baraja.remove(carta);
+				monton.add(carta);
+				cartasDadas.add(carta);
+
+			} else {
+				System.out.println("No hay mas cartas");
 			}
+
 		}
-		return cartasADar;
+
+		return cartasDadas;
+
 	}
 
-	public void cartasMonton() {
-		if (this.cartaActual == 0) {
-			System.out.println("No ha salido ninguna carta.");
-		} else {
-			for (int i = 0; i < this.cartaActual; i++) {
-				System.out.println(this.cartas.get(i));
-			}
-		}
+	public ArrayList<String> cartasMonton() {
+
+		return monton;
+
 	}
 
-	public void mostrarBaraja() {
-		for (int i = this.cartaActual; i < this.cartas.size(); i++) {
-			System.out.println(this.cartas.get(i));
-		}
+	public ArrayList<String> mostrarBaraja() {
+
+		return baraja;
+
+	}
+
+	@Override
+	public String toString() {
+		return "Baraja [" + baraja + "]";
 	}
 
 }
