@@ -18,13 +18,33 @@ public class Start {
 
 		// Se muestran las dos siguientes cartas
 
-		System.out.println(barajaEspanola.siguienteCarta());
+		try {
+			System.out.println(barajaEspanola.siguienteCarta());
+		} catch (NoHayCartasException e) {
+			
+			e.printStackTrace();
+		}
 
 		// Cartas dadas
 
-		System.out.println(barajaEspanola.darCartas(10));
-		System.out.println(barajaEspanola.darCartas(2));
-		System.out.println(barajaEspanola.darCartas(10));
+		try {
+			System.out.println(barajaEspanola.darCartas(10));
+		} catch (NoHayCartasException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println(barajaEspanola.darCartas(2));
+		} catch (NoHayCartasException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println(barajaEspanola.darCartas(10));
+		} catch (NoHayCartasException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Cartas que ya han salido
 
@@ -38,7 +58,12 @@ public class Start {
 
 		System.out.println(barajaEspanola.mostrarBaraja());
 
-		System.out.println(barajaEspanola.siguienteCarta());
+		try {
+			System.out.println(barajaEspanola.siguienteCarta());
+		} catch (NoHayCartasException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

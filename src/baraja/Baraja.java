@@ -2,6 +2,7 @@ package baraja;
 
 import java.util.ArrayList;
 
+
 import baraja.Carta.palo;
 import baraja.Carta.valor;
 
@@ -37,12 +38,12 @@ public class Baraja {
 		}
 	}
 
-	public String siguienteCarta() {
+	public String siguienteCarta() throws NoHayCartasException {
 		String carta = "";
 		if (!baraja.isEmpty()) {
 			carta = baraja.get(0);
 		} else {
-			System.out.println("No hay mas cartas");
+			throw new NoHayCartasException("No hay más cartas disponibles");
 		}
 		return carta;
 	}
@@ -53,7 +54,7 @@ public class Baraja {
 
 	}
 
-	public ArrayList<String> darCartas(int numCartas) {
+	public ArrayList<String> darCartas(int numCartas)throws NoHayCartasException {
 
 		ArrayList<String> cartasDadas = new ArrayList<String>();
 
@@ -67,7 +68,7 @@ public class Baraja {
 				cartasDadas.add(carta);
 
 			} else {
-				System.out.println("No hay mas cartas");
+				throw new NoHayCartasException("No hay más cartas disponibles");
 			}
 
 		}
